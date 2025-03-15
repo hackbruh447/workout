@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def homepage(request):
     return render(request, "diet/homepage.html")
+
+def challenges(request):
+    return render(request, "diet/challenges.html")
