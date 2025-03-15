@@ -1,13 +1,56 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Welcome to the landing page of our applicaiton</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Fitness App</title>
+    <!-- Example Icon Library (Font Awesome) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-ac6ZEXs3IGLiF+ZQ0Uek+uSrmMC2HUnC1pl+viwiu/4qlr1RMrYG8snMOn6Dxdyb2o7n2df7OF9Ti5Zb6V+Hzw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to MyFitnessApp!</h1>
+    <main>
+      <!-- Page content goes here -->
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <ul>
+        <li>
+          <a href="{% url 'homepage' %}">
+            <i class="fas fa-home"></i>
+            <span class="nav-label">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'ai' %}">
+            <i class="fas fa-robot"></i>
+            <span class="nav-label">A.I.</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'challenges' %}">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-label">Challenges</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'game' %}">
+            <i class="fas fa-gamepad"></i>
+            <span class="nav-label">Game</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <script src="{% static 'diet/homepage.js' %}"></script>
+  </body>
 </html>
