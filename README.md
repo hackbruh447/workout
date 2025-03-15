@@ -1,1 +1,1 @@
-Work Out App
+Name of app: Numix
