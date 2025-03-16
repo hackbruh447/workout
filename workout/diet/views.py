@@ -75,7 +75,6 @@ def ai(request):
     )
     
     response = model.generate_content(prompt)
-    print(response.text)
     
     try:
         # Parse the response from AI into a Python list.
@@ -89,6 +88,9 @@ def ai(request):
             {"title": "30 Minute Cardio", "description": "Do 30 minutes of cardio to improve endurance.", "points": 8},
             {"title": "Healthy Breakfast", "description": "Start your day with a balanced, nutritious breakfast.", "points": 4},
         ]
+        
+        print(response.text)
+        print("RESPONSE:", response)
     
     return render(request, "diet/ai.html", {"challenges": challenges})
 
