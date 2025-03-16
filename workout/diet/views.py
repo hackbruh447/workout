@@ -69,33 +69,46 @@ def ai(request):
 
     model = genai.GenerativeModel("gemini-1.5-flash")  # Correct model initialization
 
-    prompt = """List a few popular cookie recipes in JSON format.
+    prompt = (
+    "Return only valid JSON. Do not include any markdown formatting, extra text, or explanations. "
+    "The JSON should be an array of 8 objects. Each object must have exactly three keys: "
+    "\"title\" (a short string), \"description\" (a brief explanation), and "
+    "\"points\" (an integer between 3 and 15). The challenges should relate to calorie tracking, "
+    "creating or maintaining a calorie deficit, or overall fitness. "
+    "Example output format: "
+    "[{\"title\": \"Challenge 1\", \"description\": \"Description 1\", \"points\": 5}, ...]."
+)
 
-    Use this JSON schema:
     
     Recipe = {'recipe_name': str, 'ingredients': list[str]}
     Return: list[Recipe]
-    """
+    
 
     response = model.generate_content(prompt)
     
-    try:
-        # Parse the response from AI into a Python list.
-        challenges = json.loads(response.text)
-    except Exception as e:
-        # Fallback to a static list if AI fails.
-        challenges = [
-            {"title": "10,000 Steps", "description": "Walk 10,000 steps today to boost your calorie burn.", "points": 5},
-            {"title": "No Sugar Day", "description": "Avoid added sugars for a day to support your calorie deficit.", "points": 7},
-            {"title": "High Protein Meal", "description": "Prepare a high-protein meal to aid muscle recovery.", "points": 10},
-            {"title": "30 Minute Cardio", "description": "Do 30 minutes of cardio to improve endurance.", "points": 8},
-            {"title": "Healthy Breakfast", "description": "Start your day with a balanced, nutritious breakfast.", "points": 4},
-        ]
+    
+   
         
-        print(response.text)
-        print("RESPONSE:", response)
+   
+    challenges = json.loads(response.text)
     
     return render(request, "diet/ai.html", {"challenges": challenges})
+
+@csrf_exempt
+def update_points(request):
+    print("hi")
+    if request.method == "POST":
+        print("fiuhdshfuidshfuiwesuhidf")
+        data = json.loads(request.body)
+        points = data.get("points")
+        print(points)
+        print("fiuhdshfuidshfuiwesuhidf")
+        user = request.user
+        user.points += int(points)
+        user.save()
+        return HttpResponse(status=204)
+    else:
+        return HttpResponse(status=400)
 
 
 def login_view(request):
