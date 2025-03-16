@@ -40,7 +40,7 @@ def settings(request):
             type = False
 
         try:
-            user = User(name = username, goal = goal, type = type )
+            user = userInfo(name = username, goal = goal, type = type )
             user.save()
 
             return HttpResponseRedirect(reverse('homepage'))
