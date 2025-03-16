@@ -132,8 +132,8 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
 SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-az4fxnlu7g022q61.us.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'LDySiaLFUCvfd3odiPYMC3VDbwojPryx'
-SOCIAL_AUTH_AUTH0_SECRET = 'YOUR_AUTH0_CLIENT_SECRET'  # Replace with your secret
+SOCIAL_AUTH_AUTH0_KEY = 'WhLwlFzKTLPRJSqu2VlEEB4zQeiNPydp'
+SOCIAL_AUTH_AUTH0_SECRET = 'YOUR_ACTUAL_CLIENT_SECRET'  # Replace with your actual client secret
 SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',

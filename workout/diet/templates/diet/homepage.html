@@ -12,6 +12,22 @@
     />
   </head>
   <body>
+    <nav class="top-navbar">
+      <div class="nav-container">
+        <a href="{% url 'homepage' %}" class="nav-logo">Numix</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="{% url 'homepage' %}" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'settings' %}" class="nav-link">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'ai' %}" class="nav-link">Challenges</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <!-- Decorative corner elements -->
     <div class="corner-box top-left"></div>
     <div class="corner-box bottom-right"></div>
@@ -58,7 +74,7 @@
                 <div class="stat-value" id="challenges-completed">
                   {{ user.challenges_completed }}
                 </div>
-                <div class="stat-label">CHALLENGES COMPLETED</div>
+                <div class="stat-label">DAILY CHALLENGES COMPLETED</div>
               </div>
               <div class="stat-box">
                 <div class="stat-value">{{ user.points }}</div>
