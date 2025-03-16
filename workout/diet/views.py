@@ -30,10 +30,7 @@ def get_user_data(request):
     return JsonResponse({'points': points, 'usernames': usernames})
 
 def homepage(request):
-
-    return render(request, "diet/homepage.html",{
-        
-    })
+    return render(request, "diet/homepage.html")
 
 @csrf_exempt
 def settings(request):
@@ -49,7 +46,7 @@ def settings(request):
 
         try:
             user = request.user
-            user.user = username
+            user.username = username
             user.goal = goal
             user.type = type
             user.save()
