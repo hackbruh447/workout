@@ -1,40 +1,126 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Fetch data from the Django view
-    fetch('get_user_data')
-        .then(response => response.json())  // Parse JSON response
-        .then(data => {
-            const points = data.points;
-            const usernames = data.usernames;
+document.addEventListener("DOMContentLoaded", function () {
+    // Constants
+    const caloricGoal = 2000;
+    const POINTS_PER_CHALLENGE = 10;
+    let consumedCalories = 0;
+    let challengesCompleted = 0;
+    let totalPoints = 0;
+    let userScore = 0;
 
-            console.log(points);  // Debugging: check if points array is passed correctly
-            console.log(usernames);  // Debugging: check if usernames array is passed correctly
+    // DOM Elements
+    const caloricIntakeInput = document.getElementById("caloric-intake-input");
+    const submitCaloriesButton = document.getElementById("submit-calories");
+    const leftoverCaloriesValue = document.getElementById("leftover-calories-value");
+    const totalCaloriesValue = document.getElementById("total-calories");
+    const challengesCompletedValue = document.getElementById("challenges-completed");
+    const totalPointsValue = document.getElementById("total-points");
+    const userScoreValue = document.getElementById("user-score");
+    const leaderboardList = document.getElementById("leaderboard-list");
 
-            // Function to create a new div for each user
-            function createUserDiv(username, point) {
-                const userDiv = document.createElement('div');
-                userDiv.classList.add('user');  // You can add a CSS class to style the div
+    // Fetch leaderboard data from the database
+    function fetchLeaderboard() {
+        fetch('get_user_data')
+            .then(response => response.json())
+            .then(data => {
+                const points = data.points;
+                const usernames = data.usernames;
 
-                // Add user details to the div
-                userDiv.innerHTML = `
-                    <h3>${username}</h3>
-                    <p>Points: ${point}</p>
-                `;
-                
-                return userDiv;
-            }
+                // Clear existing leaderboard
+                leaderboardList.innerHTML = "";
 
-            // Get the user container in the DOM
-            const userContainer = document.getElementById('user-container');
+                // Create and append leaderboard items
+                points.forEach((point, index) => {
+                    const li = document.createElement("li");
+                    li.classList.add("leaderboard-item");
 
-            // Iterate over the points and usernames lists to create divs for each user
-            for (let i = 0; i < points.length; i++) {
-                const username = usernames[i];
-                const point = points[i];
-                const userDiv = createUserDiv(username, point);
-                userContainer.appendChild(userDiv);
-            }
-        })
-    
+                    li.innerHTML = `
+                        <span class="rank">${index + 1}</span>
+                        <span class="name">${usernames[index]}</span>
+                        <span class="score">${point}</span>
+                    `;
 
+                    // Highlight current user
+                    if (usernames[index] === "YOU") {
+                        li.classList.add("current-user");
+                    }
+
+                    leaderboardList.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Error fetching leaderboard data:", error));
     }
-)
+
+    // Function to update the leftover calories
+    function updateLeftoverCalories() {
+        leftoverCaloriesValue.textContent = caloricGoal - consumedCalories;
+    }
+
+    // Function to update total caloric intake display
+    function updateTotalCaloricIntake() {
+        totalCaloriesValue.textContent = consumedCalories;
+    }
+
+    // Function to handle caloric intake submission
+    function handleCaloricIntake() {
+        const inputValue = caloricIntakeInput.value.trim();
+
+        if (!inputValue || isNaN(inputValue)) {
+            alert("Please enter a valid number of calories.");
+            return;
+        }
+
+        const calories = parseInt(inputValue, 10);
+        if (calories < 0) {
+            alert("Calories cannot be negative.");
+            return;
+        }
+
+        consumedCalories += calories;
+        updateLeftoverCalories();
+        updateTotalCaloricIntake();
+        caloricIntakeInput.value = "";
+    }
+
+    // Function to handle challenge toggling
+    function handleChallengeCompletion(event) {
+        const checkmark = event.target.closest(".challenge-check");
+        const wasCompleted = checkmark.classList.contains("completed");
+
+        // Toggle completed state
+        checkmark.classList.toggle("completed");
+
+        // Update counters based on new state
+        if (checkmark.classList.contains("completed")) {
+            challengesCompleted++;
+            totalPoints += POINTS_PER_CHALLENGE;
+            userScore += POINTS_PER_CHALLENGE;
+        } else {
+            challengesCompleted = Math.max(0, challengesCompleted - 1);
+            totalPoints = Math.max(0, totalPoints - POINTS_PER_CHALLENGE);
+            userScore = Math.max(0, userScore - POINTS_PER_CHALLENGE);
+        }
+
+        // Update displays
+        challengesCompletedValue.textContent = challengesCompleted;
+        totalPointsValue.textContent = totalPoints;
+        userScoreValue.textContent = userScore;
+
+        // Update leaderboard
+        fetchLeaderboard();
+    }
+
+    // Event listeners
+    document.querySelectorAll(".challenge-check").forEach(checkmark => {
+        checkmark.addEventListener("click", handleChallengeCompletion);
+    });
+
+    submitCaloriesButton.addEventListener("click", handleCaloricIntake);
+    caloricIntakeInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") handleCaloricIntake();
+    });
+
+    // Initialize displays
+    updateLeftoverCalories();
+    updateTotalCaloricIntake();
+    fetchLeaderboard(); // Fetch and display leaderboard data
+});

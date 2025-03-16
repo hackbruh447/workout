@@ -1,0 +1,117 @@
+:root {
+    --neon-green: #4dfa4d;
+    --dark-bg: #0a0a0a;
+    --panel-bg: rgba(15, 15, 15, 0.7);
+    --panel-border: rgba(77, 250, 77, 0.3);
+    --blue-accent: #4d8efa;
+    --text-color: #ffffff;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+  }
+  
+  body {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Header with title and points display */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .points-display {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  /* Challenge container and individual challenge cards */
+  .challenge-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .challenge {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .challenge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .challenge-info {
+    flex: 1;
+  }
+  
+  .challenge-title {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .challenge-desc {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .challenge-points {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 20px;
+    color: var(--neon-green);
+  }
+  
+  /* Complete button styling */
+  .complete-btn {
+    background-color: var(--neon-green);
+    color: var(--dark-bg);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .complete-btn:hover {
+    background-color: var(--blue-accent);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .challenge {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .challenge-points,
+    .complete-btn {
+      margin: 10px 0 0 0;
+    }
+  }
+  

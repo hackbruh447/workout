@@ -78,10 +78,24 @@ def ai(request):
     """
 
     response = model.generate_content(prompt)
-
-    print(response.text)
-
-    return render(request, "diet/ai.html")
+    
+    try:
+        # Parse the response from AI into a Python list.
+        challenges = json.loads(response.text)
+    except Exception as e:
+        # Fallback to a static list if AI fails.
+        challenges = [
+            {"title": "10,000 Steps", "description": "Walk 10,000 steps today to boost your calorie burn.", "points": 5},
+            {"title": "No Sugar Day", "description": "Avoid added sugars for a day to support your calorie deficit.", "points": 7},
+            {"title": "High Protein Meal", "description": "Prepare a high-protein meal to aid muscle recovery.", "points": 10},
+            {"title": "30 Minute Cardio", "description": "Do 30 minutes of cardio to improve endurance.", "points": 8},
+            {"title": "Healthy Breakfast", "description": "Start your day with a balanced, nutritious breakfast.", "points": 4},
+        ]
+        
+        print(response.text)
+        print("RESPONSE:", response)
+    
+    return render(request, "diet/ai.html", {"challenges": challenges})
 
 
 def login_view(request):
