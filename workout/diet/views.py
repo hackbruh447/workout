@@ -96,13 +96,12 @@ def ai(request):
 
 @csrf_exempt
 def update_points(request):
-    print("hi")
+    
     if request.method == "POST":
-        print("fiuhdshfuidshfuiwesuhidf")
+        
         data = json.loads(request.body)
         points = data.get("points")
-        print(points)
-        print("fiuhdshfuidshfuiwesuhidf")
+        
         user = request.user
         user.points += int(points)
         user.save()

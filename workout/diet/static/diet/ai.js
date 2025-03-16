@@ -28,7 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log(data);
         })
         
-        totalPoints += pointsValue;
+        fetch("update_points",{
+          method: "POST",
+
+          body: JSON.stringify({
+          user: user,
+          points: pointsValue,
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        
+        totalPoints = Number(totalPoints) + Number(pointsValue);
+
         pointsDisplay.textContent = totalPoints;
   
         // Mark the challenge as completed

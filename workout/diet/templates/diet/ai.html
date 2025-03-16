@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="{% static 'diet/ai.css' %}" />
   </head>
   <body>
-    <div id="fag">{{ user.username }}</div>
+    <div id="kwab" style="display: none">{{ user.username }}</div>
     <div class="header">
       <h1>Challenge Board</h1>
-      <div class="points-display">Points: <span id="points">0</span></div>
+      <div class="points-display">
+        Points: <span id="points">{{ user.points }}</span>
+      </div>
     </div>
 
     <div class="challenge-container">
