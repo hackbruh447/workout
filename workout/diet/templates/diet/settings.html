@@ -6,23 +6,25 @@
     <title>Settings</title>
 </head>
 <body>
-    <div class="field">
-        <lable for="username">Title</lable>
-        <input type="text" name="username" id="username">
-    </div>
+    <form action="{% url 'settings' %}" method="post">
+        <div class="field">
+            <lable for="username">Title</lable>
+            <input type="text" name="username" id="username">
+        </div>
 
-    <div class="field">
-        <lable for="goal">Bid</lable>
-        <input type="text" name="goal" id="goal">
-    </div>
+        <div class="field">
+            <lable for="goal">Bid</lable>
+            <input type="text" name="goal" id="goal">
+        </div>
 
-    <div class="field">
-        <label for="caloric_choice">Select Goal</label>
-        <select name="caloric_choice" id="caloric_choice">
-            <option value="intake">Caloric Intake</option>
-            <option value="deficit">Caloric Deficit</option>
-        </select>
-    </div>
-    <input type="submit" value="update">
+        <div class="field">
+            <label for="caloric_choice">Select Goal</label>
+            <select name="caloric_choice" id="caloric_choice">
+                <option value="intake">Caloric Intake</option>
+                <option value="deficit">Caloric Deficit</option>
+            </select>
+        </div>
+        <input type="submit" value="update">
+    </form>
 </body>
 </html>

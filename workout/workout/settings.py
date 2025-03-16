@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'diet.User'  # Replace 'diet' with the app name if it's different
 
 # Application definition
 
