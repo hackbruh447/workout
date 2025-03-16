@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Locate the challenge container
         const challengeDiv = btn.closest(".challenge")
         totalPoints = document.querySelector("#points").innerHTML
-        let user = document.querySelector("#fag").innerHTML;
+        let user = document.querySelector("#kwab").innerHTML;
         // Extract the points value from the text ("Points: X")
         const pointsText = challengeDiv.querySelector(".challenge-points").textContent;
         const pointsValue = parseInt(pointsText.replace("Points: ", ""), 10);

@@ -1,166 +1,184 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Numix Dashboard</title>
-    <link rel="stylesheet" href="{% static 'diet/homepage.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <!-- Decorative corner elements -->
     <div class="corner-box top-left"></div>
     <div class="corner-box bottom-right"></div>
     <div class="corner-box bottom-left"></div>
 
     <div class="container">
-        <!-- Header section -->
-        <div class="welcome-banner">
-            <h1><span>Numix</span> <span class="neon-text">DASHBOARD</span></h1>
+      <!-- Header section -->
+      <div class="welcome-banner">
+        <h1><span>Numix</span> <span class="neon-text">DASHBOARD</span></h1>
+      </div>
+
+      <!-- Main content grid -->
+      <div class="dashboard-grid">
+        <!-- Leaderboard -->
+        <div class="panel">
+          <div class="panel-header">LEADERBOARD</div>
+          <div class="panel-content">
+            <ul class="leaderboard-list" id="leaderboard-list">
+              <!-- Dynamic content will be injected here -->
+            </ul>
+          </div>
         </div>
 
-        <!-- Main content grid -->
-        <div class="dashboard-grid">
-            <!-- Leaderboard -->
-            <div class="panel">
-                <div class="panel-header">LEADERBOARD</div>
-                <div class="panel-content">
-                    <ul class="leaderboard-list" id="leaderboard-list">
-                        <!-- Dynamic content will be injected here -->
-                    </ul>
-                </div>
+        <!-- Profile & Stats -->
+        <div class="panel">
+          <div class="panel-header">PROFILE & STATS</div>
+          <div class="panel-content">
+            <div class="profile-header">
+              <div class="avatar">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="username neon-text">{{ user.username }}</div>
             </div>
-
-            <!-- Profile & Stats -->
-            <div class="panel">
-                <div class="panel-header">PROFILE & STATS</div>
-                <div class="panel-content">
-                    <div class="profile-header">
-                        <div class="avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="username neon-text">{{ user.username }}</div>
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <div class="stat-value" id="total-calories">2,450</div>
-                            <div class="stat-label">CALORIC INTAKE</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-value" id="current-streak">0</div>
-                            <div class="stat-label">DAY STREAK</div>
-                        </div>
-                        <div class="stat-box highlight">
-                            <div class="stat-value" id="challenges-completed">12</div>
-                            <div class="stat-label">CHALLENGES COMPLETED</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-value">231</div>
-                            <div class="stat-label">TOTAL POINTS</div>
-                        </div>
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-label">DAILY GOAL: 78%</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 78%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-value" id="total-calories">2,450</div>
+                <div class="stat-label">CALORIC INTAKE</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="current-streak">0</div>
+                <div class="stat-label">DAY STREAK</div>
+              </div>
+              <div class="stat-box highlight">
+                <div class="stat-value" id="challenges-completed">12</div>
+                <div class="stat-label">CHALLENGES COMPLETED</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">{{ user.points }}</div>
+                <div class="stat-label">TOTAL POINTS</div>
+              </div>
             </div>
-
-            <!-- Daily Challenges -->
-            <div class="panel">
-                <div class="panel-header">DAILY FITNESS CHALLENGES</div>
-                <div class="panel-content">
-                    <ul class="challenge-list">
-                        <li class="challenge-item">
-                            <div class="challenge-content">
-                                <div class="challenge-title">Morning Stretch Routine</div>
-                                <div class="challenge-desc">Complete 10 minutes of morning stretches</div>
-                            </div>
-                            <button class="challenge-check" data-challenge="1">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </li>
-                        <li class="challenge-item">
-                            <div class="challenge-content">
-                                <div class="challenge-title">10K Steps</div>
-                                <div class="challenge-desc">Reach 10,000 steps before the end of the day</div>
-                            </div>
-                            <button class="challenge-check" data-challenge="2">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </li>
-                        <li class="challenge-item">
-                            <div class="challenge-content">
-                                <div class="challenge-title">Hydration Goal</div>
-                                <div class="challenge-desc">Drink 8 glasses of water throughout the day</div>
-                            </div>
-                            <button class="challenge-check" data-challenge="3">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </li>
-                        <li class="challenge-item">
-                            <div class="challenge-content">
-                                <div class="challenge-title">HIIT Workout</div>
-                                <div class="challenge-desc">Complete a 15-minute high-intensity interval training session</div>
-                            </div>
-                            <button class="challenge-check" data-challenge="4">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </li>
-                        <li class="challenge-item">
-                            <div class="challenge-content">
-                                <div class="challenge-title">Mindful Meditation</div>
-                                <div class="challenge-desc">5 minutes of meditation for mental fitness</div>
-                            </div>
-                            <button class="challenge-check" data-challenge="5">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+            <div class="progress-container">
+              <div class="progress-label">DAILY GOAL: 78%</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 78%"></div>
+              </div>
             </div>
+          </div>
         </div>
 
-        <!-- Bottom Panels -->
-        <div class="bottom-panels">
-            <!-- Caloric Goal Panel -->
-            <div class="panel">
-                <div class="panel-header">CALORIC GOAL</div>
-                <div class="panel-content">
-                    <div class="caloric-goal">
-                        <div class="stat-value" id="caloric-goal-value">2000</div>
-                        <div class="stat-label">DAILY GOAL</div>
-                    </div>
+        <!-- Daily Challenges -->
+        <div class="panel">
+          <div class="panel-header">DAILY FITNESS CHALLENGES</div>
+          <div class="panel-content">
+            <ul class="challenge-list">
+              <li class="challenge-item">
+                <div class="challenge-content">
+                  <div class="challenge-title">Morning Stretch Routine</div>
+                  <div class="challenge-desc">
+                    Complete 10 minutes of morning stretches
+                  </div>
                 </div>
-            </div>
-
-            <!-- Caloric Intake Input Panel -->
-            <div class="panel">
-                <div class="panel-header">CALORIC INTAKE</div>
-                <div class="panel-content">
-                    <div class="caloric-input">
-                        <input type="number" id="caloric-intake-input" placeholder="Enter calories consumed" />
-                        <button id="submit-calories">Submit</button>
-                    </div>
+                <button class="challenge-check" data-challenge="1">
+                  <i class="fas fa-check"></i>
+                </button>
+              </li>
+              <li class="challenge-item">
+                <div class="challenge-content">
+                  <div class="challenge-title">10K Steps</div>
+                  <div class="challenge-desc">
+                    Reach 10,000 steps before the end of the day
+                  </div>
                 </div>
-            </div>
-
-            <!-- Leftover Calories Panel -->
-            <div class="panel">
-                <div class="panel-header">LEFTOVER CALORIES</div>
-                <div class="panel-content">
-                    <div class="leftover-calories">
-                        <div class="stat-value" id="leftover-calories-value">2000</div>
-                        <div class="stat-label">REMAINING</div>
-                    </div>
+                <button class="challenge-check" data-challenge="2">
+                  <i class="fas fa-check"></i>
+                </button>
+              </li>
+              <li class="challenge-item">
+                <div class="challenge-content">
+                  <div class="challenge-title">Hydration Goal</div>
+                  <div class="challenge-desc">
+                    Drink 8 glasses of water throughout the day
+                  </div>
                 </div>
-            </div>
+                <button class="challenge-check" data-challenge="3">
+                  <i class="fas fa-check"></i>
+                </button>
+              </li>
+              <li class="challenge-item">
+                <div class="challenge-content">
+                  <div class="challenge-title">HIIT Workout</div>
+                  <div class="challenge-desc">
+                    Complete a 15-minute high-intensity interval training
+                    session
+                  </div>
+                </div>
+                <button class="challenge-check" data-challenge="4">
+                  <i class="fas fa-check"></i>
+                </button>
+              </li>
+              <li class="challenge-item">
+                <div class="challenge-content">
+                  <div class="challenge-title">Mindful Meditation</div>
+                  <div class="challenge-desc">
+                    5 minutes of meditation for mental fitness
+                  </div>
+                </div>
+                <button class="challenge-check" data-challenge="5">
+                  <i class="fas fa-check"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      <!-- Bottom Panels -->
+      <div class="bottom-panels">
+        <!-- Caloric Goal Panel -->
+        <div class="panel">
+          <div class="panel-header">CALORIC GOAL</div>
+          <div class="panel-content">
+            <div class="caloric-goal">
+              <div class="stat-value" id="caloric-goal-value">2000</div>
+              <div class="stat-label">DAILY GOAL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caloric Intake Input Panel -->
+        <div class="panel">
+          <div class="panel-header">CALORIC INTAKE</div>
+          <div class="panel-content">
+            <div class="caloric-input">
+              <input
+                type="number"
+                id="caloric-intake-input"
+                placeholder="Enter calories consumed"
+              />
+              <button id="submit-calories">Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leftover Calories Panel -->
+        <div class="panel">
+          <div class="panel-header">LEFTOVER CALORIES</div>
+          <div class="panel-content">
+            <div class="leftover-calories">
+              <div class="stat-value" id="leftover-calories-value">2000</div>
+              <div class="stat-label">REMAINING</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="{% static 'diet/homepage.js' %}"></script>
-</body>
+  </body>
 </html>

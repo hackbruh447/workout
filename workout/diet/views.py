@@ -98,7 +98,7 @@ def ai(request):
 def update_points(request):
     
     if request.method == "POST":
-        print("fiuhdshfuidshfuiwesuhidf")
+        
         data = json.loads(request.body)
         points = data.get("points")
         
