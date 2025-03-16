@@ -1,7 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import userInfo
 
-
+import json
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render
+from django.views.decorators.csrf import csrf_exempt
 
 import os
 import google.generativeai as genai
@@ -11,9 +19,36 @@ import google.generativeai as genai
 # Create your views here.
 
 def homepage(request):
-    return render(request, "diet/homepage.html")
+    lst=[]
+    users = userInfo.objects.all()
+    
+        
+    return render(request, "diet/homepage.html",{
+        
+    })
 
+@csrf_exempt
 def settings(request):
+
+    if request.method=="POST":
+        username = request.POST["username"]
+        goal = request.POST["goal"]
+        description = request.POST["caloric_choice"]
+        if((description)=="intake"):
+            type = True
+        else:
+            type = False
+
+        try:
+            user = User(name = username, goal = goal, type = type )
+            user.save()
+
+            return HttpResponseRedirect(reverse('homepage'))
+       
+        except:
+            return render(request, "diet/settings.html", {
+                    "invalid":"Please enter correct input"})
+
     return render(request, "diet/settings.html")
 
 

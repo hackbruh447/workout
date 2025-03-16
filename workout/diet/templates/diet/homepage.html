@@ -7,19 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numix Dashboard</title>
     <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <!-- Decorative corner elements -->
-    <div class="corner-box top-left"></div>
-    <div class="corner-box bottom-right"></div>
-    <div class="corner-box bottom-left"></div>
-    
-    <div class="container">
-        <!-- Header section -->
-        <div class="welcome-banner">
-            <h1><span>Numix</span> <span class="neon-text">DASHBOARD</span></h1>
-        </div>
+  </head>
+  <body>
+  <h1>Welcome to MyFitnessApp {{ request.user.email }} !</h1>
+    <main>
+      <!-- Page content goes here -->
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <ul>
+        <li>
+          <a href="{% url 'homepage' %}">
+            <i class="fas fa-home"></i>
+            <span class="nav-label">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'ai' %}">
+            <i class="fas fa-robot"></i>
+            <span class="nav-label">A.I.</span>
+          </a>
+        </li>
+       
         
         <!-- Main content grid -->
         <div class="dashboard-grid">
