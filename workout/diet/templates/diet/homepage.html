@@ -1,46 +1,175 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Fitness App</title>
-    <!-- Example Icon Library (Font Awesome) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      integrity="sha512-ac6ZEXs3IGLiF+ZQ0Uek+uSrmMC2HUnC1pl+viwiu/4qlr1RMrYG8snMOn6Dxdyb2o7n2df7OF9Ti5Zb6V+Hzw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numix Dashboard</title>
     <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
-  </head>
-  <body>
-    <h1>Welcome to MyFitnessApp!</h1>
-    <main>
-      <!-- Page content goes here -->
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <ul>
-        <li>
-          <a href="{% url 'homepage' %}">
-            <i class="fas fa-home"></i>
-            <span class="nav-label">Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'ai' %}">
-            <i class="fas fa-robot"></i>
-            <span class="nav-label">A.I.</span>
-          </a>
-        </li>
-       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Decorative corner elements -->
+    <div class="corner-box top-left"></div>
+    <div class="corner-box bottom-right"></div>
+    <div class="corner-box bottom-left"></div>
+    
+    <div class="container">
+        <!-- Header section -->
+        <div class="welcome-banner">
+            <h1><span>Numix</span> <span class="neon-text">DASHBOARD</span></h1>
+        </div>
         
-      </ul>
-    </nav>
-
+        <!-- Main content grid -->
+        <div class="dashboard-grid">
+            <!-- Leaderboard -->
+            <div class="panel">
+                <div class="panel-header">LEADERBOARD</div>
+                <div class="panel-content">
+                    <ul class="leaderboard-list">
+                        <li>
+                            <span class="rank">1</span>
+                            <span class="name">Alex Smith</span>
+                            <span class="score">289</span>
+                        </li>
+                        <li>
+                            <span class="rank">2</span>
+                            <span class="name">Jamie Chen</span>
+                            <span class="score">275</span>
+                        </li>
+                        <li>
+                            <span class="rank">3</span>
+                            <span class="name">Taylor Kim</span>
+                            <span class="score">254</span>
+                        </li>
+                        <li>
+                            <span class="rank">4</span>
+                            <span class="name">Casey Wong</span>
+                            <span class="score">231</span>
+                        </li>
+                        <li>
+                            <span class="rank">5</span>
+                            <span class="name">Jordan Lee</span>
+                            <span class="score">228</span>
+                        </li>
+                        <li>
+                            <span class="rank">6</span>
+                            <span class="name">Morgan Davis</span>
+                            <span class="score">217</span>
+                        </li>
+                        <li class="current-user">
+                          <span class="rank">7</span>
+                          <span class="name">YOU</span>
+                          <span class="score">0</span>
+                      </li>
+                        <li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Profile & Stats -->
+            <div class="panel">
+                <div class="panel-header">PROFILE & STATS</div>
+                <div class="panel-content">
+                    <div class="profile-header">
+                        <div class="avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="username neon-text">FitUser2025</div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-value" id="total-calories">2,450</div>
+                            <div class="stat-label">CALORIC INTAKE</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="current-streak">7</div>
+                            <div class="stat-label">DAY STREAK</div>
+                        </div>
+                        <div class="stat-box highlight">
+                            <div class="stat-value" id="challenges-completed">12</div>
+                            <div class="stat-label">CHALLENGES COMPLETED</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">231</div>
+                            <div class="stat-label">TOTAL POINTS</div>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">DAILY GOAL: 78%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Daily Challenges -->
+            <div class="panel">
+                <div class="panel-header">DAILY FITNESS CHALLENGES</div>
+                <div class="panel-content">
+                    <ul class="challenge-list">
+                        <li class="challenge-item">
+                            <div class="challenge-content">
+                                <div class="challenge-title">Morning Stretch Routine</div>
+                                <div class="challenge-desc">Complete 10 minutes of morning stretches</div>
+                            </div>
+                            <button class="challenge-check" data-challenge="1">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </li>
+                        <li class="challenge-item">
+                            <div class="challenge-content">
+                                <div class="challenge-title">10K Steps</div>
+                                <div class="challenge-desc">Reach 10,000 steps before the end of the day</div>
+                            </div>
+                            <button class="challenge-check" data-challenge="2">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </li>
+                        <li class="challenge-item">
+                            <div class="challenge-content">
+                                <div class="challenge-title">Hydration Goal</div>
+                                <div class="challenge-desc">Drink 8 glasses of water throughout the day</div>
+                            </div>
+                            <button class="challenge-check" data-challenge="3">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </li>
+                        <li class="challenge-item">
+                            <div class="challenge-content">
+                                <div class="challenge-title">HIIT Workout</div>
+                                <div class="challenge-desc">Complete a 15-minute high-intensity interval training session</div>
+                            </div>
+                            <button class="challenge-check" data-challenge="4">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </li>
+                        <li class="challenge-item">
+                            <div class="challenge-content">
+                                <div class="challenge-title">Mindful Meditation</div>
+                                <div class="challenge-desc">5 minutes of meditation for mental fitness</div>
+                            </div>
+                            <button class="challenge-check" data-challenge="5">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer navigation -->
+        <div class="footer-nav">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="nav-icon"><i class="fas fa-user"></i></div>
+            <div class="nav-icon"><i class="fas fa-dumbbell"></i></div>
+            <div class="nav-icon"><i class="fas fa-cog"></i></div>
+        </div>
+    </div>
+    
     <script src="{% static 'diet/homepage.js' %}"></script>
-  </body>
+</body>
 </html>
