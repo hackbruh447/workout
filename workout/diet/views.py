@@ -58,18 +58,28 @@ def ai(request):
 
     model = genai.GenerativeModel("gemini-1.5-flash")  # Correct model initialization
 
-    prompt = """List a few popular cookie recipes in JSON format.
-
-    Use this JSON schema:
-
-    Recipe = {'recipe_name': str, 'ingredients': list[str]}
-    Return: list[Recipe]
-    """
-
+    prompt = (
+        "Generate 5 unique daily fitness challenges in JSON format. "
+        "Each challenge should be an object with keys: 'title' (a short string), "
+        "'description' (a brief explanation), and 'points' (an integer between 3 and 15 "
+        "representing difficulty). The challenges should relate to calorie tracking, "
+        "maintaining or creating a calorie deficit, or overall fitness. Return only the JSON array."
+    )
+    
     response = model.generate_content(prompt)
-
     print(response.text)
-
-    return render(request, "diet/ai.html")
-
-
+    
+    try:
+        # Parse the response from AI into a Python list.
+        challenges = json.loads(response.text)
+    except Exception as e:
+        # Fallback to a static list if AI fails.
+        challenges = [
+            {"title": "10,000 Steps", "description": "Walk 10,000 steps today to boost your calorie burn.", "points": 5},
+            {"title": "No Sugar Day", "description": "Avoid added sugars for a day to support your calorie deficit.", "points": 7},
+            {"title": "High Protein Meal", "description": "Prepare a high-protein meal to aid muscle recovery.", "points": 10},
+            {"title": "30 Minute Cardio", "description": "Do 30 minutes of cardio to improve endurance.", "points": 8},
+            {"title": "Healthy Breakfast", "description": "Start your day with a balanced, nutritious breakfast.", "points": 4},
+        ]
+    
+    return render(request, "diet/ai.html", {"challenges": challenges})

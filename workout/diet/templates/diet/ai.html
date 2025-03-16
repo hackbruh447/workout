@@ -1,11 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Generator</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge Board</title>
+    <link rel="stylesheet" href="{% static 'diet/ai.css' %}" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Challenge Board</h1>
+      <div class="points-display">Points: <span id="points">0</span></div>
+    </div>
+
+    <div class="challenge-container">
+      {% for challenge in challenges %}
+      <div class="challenge">
+        <div class="challenge-info">
+          <h2 class="challenge-title">{{ challenge.title }}</h2>
+          <p class="challenge-desc">{{ challenge.description }}</p>
+        </div>
+        <div class="challenge-points">Points: {{ challenge.points }}</div>
+        <button class="complete-btn">Complete</button>
+      </div>
+      {% empty %}
+      <p>No challenges available at this time.</p>
+      {% endfor %}
+    </div>
+
+    <script src="{% static 'diet/ai.js' %}"></script>
+  </body>
 </html>
