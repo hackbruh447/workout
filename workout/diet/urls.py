@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 urlpatterns = [
     path("", views.homepage, name="homepage"),
@@ -8,5 +8,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("logout", views.logout_view, name="logout"),
     path("get_user_data", views.get_user_data, name="leaderboard"),
-    path("update_points", views.update_points, name="update_points")
+    path("update_points", views.update_points, name="update_points"),
+    path('', include('social_django.urls', namespace='social'))
 ]

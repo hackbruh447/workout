@@ -10,6 +10,7 @@ from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 
 import os
 import google.generativeai as genai
@@ -29,6 +30,7 @@ def get_user_data(request):
     # Return the data as a JSON response
     return JsonResponse({'points': points, 'usernames': usernames})
 
+@login_required
 def homepage(request):
 
     return render(request, "diet/homepage.html",{
@@ -158,3 +160,6 @@ def register(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("homepage"))
+
+def login_redirect(request):
+    return redirect('social:begin', backend='auth0')
