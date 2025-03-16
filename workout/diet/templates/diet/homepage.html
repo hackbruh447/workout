@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
   </head>
   <body>
-  <h1>Welcome to MyFitnessApp {{ request.user.email }} !</h1>
+  <h1>Welcome {{ request.user.email }} !</h1>
     <main>
       <!-- Page content goes here -->
     </main>
@@ -34,6 +34,9 @@
         <!-- Main content grid -->
         <div class="dashboard-grid">
             <!-- Leaderboard -->
+            <div id="user-container"></div>
+
+            
             <div class="panel">
                 <div class="panel-header">LEADERBOARD</div>
                 <div class="panel-content">
@@ -181,5 +184,6 @@
     </div>
     
     <script src="{% static 'diet/homepage.js' %}"></script>
+    
 </body>
 </html>
