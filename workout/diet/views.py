@@ -24,7 +24,7 @@ def get_user_data(request):
     
     # Create two separate lists: one for points and one for usernames
     points = [user.points for user in users]
-    usernames = [user.name for user in users]
+    usernames = [user.username for user in users]
     
     # Return the data as a JSON response
     return JsonResponse({'points': points, 'usernames': usernames})
