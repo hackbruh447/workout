@@ -1,0 +1,182 @@
+:root {
+    --neon-green: #4dfa4d;
+    --dark-bg: #0a0a0a;
+    --panel-bg: rgba(15, 15, 15, 0.7);
+    --panel-border: rgba(77, 250, 77, 0.3);
+    --blue-accent: #4d8efa;
+    --orange-accent: #fa7a4d;
+    --purple-accent: #a64dfa;
+    --text-color: #ffffff;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+  }
+  
+  body {
+    /* Dynamic background: linear gradient base with two subtle radial highlights */
+    background: 
+      radial-gradient(circle at top left, rgba(77,250,77,0.15), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(77,250,77,0.15), transparent 40%),
+      linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    background-size: 200% 200%;
+    animation: backgroundShift 15s ease infinite;
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Animation for a shifting background effect */
+  @keyframes backgroundShift {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  
+  /* Container for the profile image and fields */
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Wrapper for the profile image and upload button */
+  .profile-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Circle profile image container */
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--neon-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* Hide the default file input visually */
+  .upload-btn-wrapper {
+    position: relative;
+  }
+  
+  #imageUpload {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+  }
+  
+  /* Custom upload button styling */
+  #uploadBtn {
+    background-color: var(--neon-green);
+    color: var(--dark-bg);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+  }
+  
+  #uploadBtn:hover {
+    background-color: var(--blue-accent);
+  }
+  
+  /* Fields container */
+  .fields-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Each field */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* Field labels (supporting both correct 'label' and misspelled 'lable') */
+  .field label,
+  .field lable {
+    font-weight: bold;
+    color: var(--neon-green);
+  }
+  
+  /* Inputs and select styling */
+  .field input[type="text"],
+  .field input[type="number"],
+  .field select {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid var(--panel-border);
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Submit button */
+  input[type="submit"] {
+    align-self: flex-start;
+    background-color: var(--neon-green);
+    color: var(--dark-bg);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: var(--blue-accent);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .profile-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .fields-area {
+      width: 100%;
+    }
+    .field input[type="text"],
+    .field input[type="number"],
+    .field select {
+      width: 100%;
+    }
+  }
+  

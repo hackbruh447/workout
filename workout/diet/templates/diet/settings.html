@@ -1,28 +1,61 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings</title>
-</head>
-<body>
-    <div class="field">
-        <lable for="username">Title</lable>
-        <input type="text" name="username" id="username">
-    </div>
+    <link rel="stylesheet" href="{% static 'diet/settings.css' %}" />
+  </head>
+  <body>
+    <div class="profile-container">
+      <!-- Profile Image and Upload Wrapper -->
+      <div class="profile-image-wrapper">
+        <div class="profile-image">
+          <img
+            src="{% static 'diet/default-profile.png' %}"
+            alt="Profile Image"
+            id="profileImg"
+          />
+        </div>
+        <!-- Custom Upload Button -->
+        <div class="upload-btn-wrapper">
+          <!-- Hidden file input -->
+          <input type="file" id="imageUpload" accept="image/*" />
+          <!-- Visible button that triggers the file input -->
+          <button type="button" id="uploadBtn">Upload</button>
+        </div>
+      </div>
 
-    <div class="field">
-        <lable for="goal">Bid</lable>
-        <input type="text" name="goal" id="goal">
-    </div>
+      <div class="fields-area">
+        <div class="field">
+          <lable for="username">NAME</lable>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            style="text-transform: capitalize"
+          />
+        </div>
 
-    <div class="field">
-        <label for="caloric_choice">Select Goal</label>
-        <select name="caloric_choice" id="caloric_choice">
+        <div class="field">
+          <lable for="goal">GOAL</lable>
+          <input type="number" name="goal" id="goal" />
+        </div>
+
+        <div class="field">
+          <label for="caloric_choice">Select Goal</label>
+          <select name="caloric_choice" id="caloric_choice">
             <option value="intake">Caloric Intake</option>
             <option value="deficit">Caloric Deficit</option>
-        </select>
+          </select>
+        </div>
+        <input type="submit" value="update" />
+      </div>
     </div>
-    <input type="submit" value="update">
-</body>
+
+    <!-- Optional JavaScript to sync button click to file input -->
+
+    <script src="{% static 'diet/settings.js' %}"></script>
+  </body>
 </html>
