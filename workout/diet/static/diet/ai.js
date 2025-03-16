@@ -8,14 +8,15 @@ document.addEventListener("DOMContentLoaded", function () {
     completeButtons.forEach((btn) => {
       btn.addEventListener("click", function () {
         // Locate the challenge container
-        const challengeDiv = btn.closest(".challenge");
+        const challengeDiv = btn.closest(".challenge")
+        totalPoints = document.querySelector("#points").innerHTML
         let user = document.querySelector("#fag").innerHTML;
         // Extract the points value from the text ("Points: X")
         const pointsText = challengeDiv.querySelector(".challenge-points").textContent;
         const pointsValue = parseInt(pointsText.replace("Points: ", ""), 10);
         console.log(user)
         
-        fetch("update_points/",{
+        fetch("update_points",{
           method: "POST",
 
           body: JSON.stringify({
@@ -28,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log(data);
         })
         
-        totalPoints += pointsValue;
+        totalPoints = Number(totalPoints) + Number(pointsValue);
+
         pointsDisplay.textContent = totalPoints;
   
         // Mark the challenge as completed
