@@ -9,9 +9,24 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.addEventListener("click", function () {
         // Locate the challenge container
         const challengeDiv = btn.closest(".challenge");
+        let user = document.querySelector("#fag").innerHTML;
         // Extract the points value from the text ("Points: X")
         const pointsText = challengeDiv.querySelector(".challenge-points").textContent;
         const pointsValue = parseInt(pointsText.replace("Points: ", ""), 10);
+        console.log(user)
+        
+        fetch("update_points/",{
+          method: "POST",
+
+          body: JSON.stringify({
+          user: user,
+          points: pointsValue,
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
         
         totalPoints += pointsValue;
         pointsDisplay.textContent = totalPoints;
