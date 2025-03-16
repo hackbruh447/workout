@@ -1,86 +1,37 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numix Dashboard</title>
-    <link rel="stylesheet" href="{% static 'diet/homepage.css' %}" />
-  </head>
-  <body>
-  <h1>Welcome {{ request.user.email }} !</h1>
-    <main>
-      <!-- Page content goes here -->
-    </main>
+    <link rel="stylesheet" href="{% static 'diet/homepage.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Decorative corner elements -->
+    <div class="corner-box top-left"></div>
+    <div class="corner-box bottom-right"></div>
+    <div class="corner-box bottom-left"></div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-      <ul>
-        <li>
-          <a href="{% url 'homepage' %}">
-            <i class="fas fa-home"></i>
-            <span class="nav-label">Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'ai' %}">
-            <i class="fas fa-robot"></i>
-            <span class="nav-label">A.I.</span>
-          </a>
-        </li>
-       
-        
+    <div class="container">
+        <!-- Header section -->
+        <div class="welcome-banner">
+            <h1><span>Numix</span> <span class="neon-text">DASHBOARD</span></h1>
+        </div>
+
         <!-- Main content grid -->
         <div class="dashboard-grid">
             <!-- Leaderboard -->
-            <div id="user-container"></div>
-
-            
             <div class="panel">
                 <div class="panel-header">LEADERBOARD</div>
                 <div class="panel-content">
-                    <ul class="leaderboard-list">
-                        <li>
-                            <span class="rank">1</span>
-                            <span class="name">Alex Smith</span>
-                            <span class="score">289</span>
-                        </li>
-                        <li>
-                            <span class="rank">2</span>
-                            <span class="name">Jamie Chen</span>
-                            <span class="score">275</span>
-                        </li>
-                        <li>
-                            <span class="rank">3</span>
-                            <span class="name">Taylor Kim</span>
-                            <span class="score">254</span>
-                        </li>
-                        <li>
-                            <span class="rank">4</span>
-                            <span class="name">Casey Wong</span>
-                            <span class="score">231</span>
-                        </li>
-                        <li>
-                            <span class="rank">5</span>
-                            <span class="name">Jordan Lee</span>
-                            <span class="score">228</span>
-                        </li>
-                        <li>
-                            <span class="rank">6</span>
-                            <span class="name">Morgan Davis</span>
-                            <span class="score">217</span>
-                        </li>
-                        <li class="current-user">
-                          <span class="rank">7</span>
-                          <span class="name">YOU</span>
-                          <span class="score">0</span>
-                      </li>
-                        <li>
+                    <ul class="leaderboard-list" id="leaderboard-list">
+                        <!-- Dynamic content will be injected here -->
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Profile & Stats -->
             <div class="panel">
                 <div class="panel-header">PROFILE & STATS</div>
@@ -93,19 +44,19 @@
                     </div>
                     <div class="stats-grid">
                         <div class="stat-box">
-                            <div class="stat-value" id="total-calories">{{ user.goal }}</div>
+                            <div class="stat-value" id="total-calories">2,450</div>
                             <div class="stat-label">CALORIC INTAKE</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="current-streak">7</div>
+                            <div class="stat-value" id="current-streak">0</div>
                             <div class="stat-label">DAY STREAK</div>
                         </div>
                         <div class="stat-box highlight">
-                            <div class="stat-value" id="challenges-completed">{{ user.challenges_completed }}</div>
+                            <div class="stat-value" id="challenges-completed">12</div>
                             <div class="stat-label">CHALLENGES COMPLETED</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value">{{ user.points }}</div>
+                            <div class="stat-value">231</div>
                             <div class="stat-label">TOTAL POINTS</div>
                         </div>
                     </div>
@@ -117,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Daily Challenges -->
             <div class="panel">
                 <div class="panel-header">DAILY FITNESS CHALLENGES</div>
@@ -172,18 +123,44 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Footer navigation -->
-        <div class="footer-nav">
-            <div class="nav-icon"><i class="fas fa-home"></i></div>
-            <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
-            <div class="nav-icon"><i class="fas fa-user"></i></div>
-            <div class="nav-icon"><i class="fas fa-dumbbell"></i></div>
-            <div class="nav-icon"><i class="fas fa-cog"></i></div>
+
+        <!-- Bottom Panels -->
+        <div class="bottom-panels">
+            <!-- Caloric Goal Panel -->
+            <div class="panel">
+                <div class="panel-header">CALORIC GOAL</div>
+                <div class="panel-content">
+                    <div class="caloric-goal">
+                        <div class="stat-value" id="caloric-goal-value">2000</div>
+                        <div class="stat-label">DAILY GOAL</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caloric Intake Input Panel -->
+            <div class="panel">
+                <div class="panel-header">CALORIC INTAKE</div>
+                <div class="panel-content">
+                    <div class="caloric-input">
+                        <input type="number" id="caloric-intake-input" placeholder="Enter calories consumed" />
+                        <button id="submit-calories">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leftover Calories Panel -->
+            <div class="panel">
+                <div class="panel-header">LEFTOVER CALORIES</div>
+                <div class="panel-content">
+                    <div class="leftover-calories">
+                        <div class="stat-value" id="leftover-calories-value">2000</div>
+                        <div class="stat-label">REMAINING</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <script src="{% static 'diet/homepage.js' %}"></script>
-    
 </body>
 </html>

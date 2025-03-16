@@ -19,10 +19,11 @@ body {
   background-color: var(--dark-bg);
   color: white;
   min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  overflow-x: hidden;
+  padding: 9%;
+  overflow: hidden;
   position: relative;
 }
 
@@ -91,7 +92,7 @@ body {
   border: 1px solid var(--panel-border);
   border-radius: 5px;
   overflow: hidden;
-  min-height: 400px;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -274,6 +275,7 @@ body {
   justify-content: center;
   margin-left: 10px;
   transition: all 0.3s;
+  flex-shrink: 0;
 }
 
 .challenge-check:hover {
@@ -283,33 +285,6 @@ body {
 .challenge-check.completed {
   background-color: var(--neon-green);
   color: var(--dark-bg);
-}
-
-/* Footer navigation */
-.footer-nav {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-  background-color: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 25px;
-  padding: 10px 20px;
-}
-
-.nav-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.nav-icon:hover {
-  color: var(--neon-green);
 }
 
 /* Animation for completed challenges */
@@ -352,4 +327,52 @@ body {
   .stats-grid {
       grid-template-columns: 1fr;
   }
+}
+
+/* Bottom Panels */
+.bottom-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Caloric Input Styling */
+.caloric-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.caloric-input input {
+  padding: 10px;
+  border: 1px solid var(--panel-border);
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 16px;
+}
+
+.caloric-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.caloric-input button {
+  padding: 10px;
+  background-color: var(--neon-green);
+  border: none;
+  border-radius: 5px;
+  color: var(--dark-bg);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.caloric-input button:hover {
+  background-color: rgba(77, 250, 77, 0.8);
+}
+
+/* Leftover Calories Styling */
+.leftover-calories .stat-value {
+  color: var(--neon-green);
 }
