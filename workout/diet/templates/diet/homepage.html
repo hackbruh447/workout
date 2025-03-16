@@ -89,11 +89,11 @@
                         <div class="avatar">
                             <i class="fas fa-user-circle"></i>
                         </div>
-                        <div class="username neon-text">FitUser2025</div>
+                        <div class="username neon-text">{{ user.name }}</div>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-box">
-                            <div class="stat-value" id="total-calories">2,450</div>
+                            <div class="stat-value" id="total-calories">{{ user.goal }}</div>
                             <div class="stat-label">CALORIC INTAKE</div>
                         </div>
                         <div class="stat-box">
@@ -105,7 +105,7 @@
                             <div class="stat-label">CHALLENGES COMPLETED</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value">231</div>
+                            <div class="stat-value">{{ user.points }}</div>
                             <div class="stat-label">TOTAL POINTS</div>
                         </div>
                     </div>
