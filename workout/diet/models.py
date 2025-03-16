@@ -10,6 +10,7 @@ class User(AbstractUser):
     goal = models.IntegerField(default = 0)
     type = models.BooleanField(default=True)
     points = models.IntegerField(default = 0)
+    challenges_completed = models.IntegerField(default = 0)
 
 
     def __str__(self):

@@ -24,16 +24,13 @@ def get_user_data(request):
     
     # Create two separate lists: one for points and one for usernames
     points = [user.points for user in users]
-    usernames = [user.name for user in users]
+    usernames = [user.username for user in users]
     
     # Return the data as a JSON response
     return JsonResponse({'points': points, 'usernames': usernames})
 
 def homepage(request):
-
-    return render(request, "diet/homepage.html",{
-        
-    })
+    return render(request, "diet/homepage.html")
 
 @csrf_exempt
 def settings(request):
@@ -49,7 +46,7 @@ def settings(request):
 
         try:
             user = request.user
-            user.user = username
+            user.username = username
             user.goal = goal
             user.type = type
             user.save()
