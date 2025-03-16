@@ -30,7 +30,10 @@ def get_user_data(request):
     return JsonResponse({'points': points, 'usernames': usernames})
 
 def homepage(request):
-    return render(request, "diet/homepage.html")
+
+    return render(request, "diet/homepage.html",{
+        
+    })
 
 @csrf_exempt
 def settings(request):
@@ -46,7 +49,7 @@ def settings(request):
 
         try:
             user = request.user
-            user.username = username
+            user.user = username
             user.goal = goal
             user.type = type
             user.save()
@@ -69,7 +72,7 @@ def ai(request):
     prompt = """List a few popular cookie recipes in JSON format.
 
     Use this JSON schema:
-
+    
     Recipe = {'recipe_name': str, 'ingredients': list[str]}
     Return: list[Recipe]
     """
