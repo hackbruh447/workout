@@ -125,25 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.auth0.Auth0OAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
-SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-az4fxnlu7g022q61.us.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'WhLwlFzKTLPRJSqu2VlEEB4zQeiNPydp'
-SOCIAL_AUTH_AUTH0_SECRET = 'YOUR_ACTUAL_CLIENT_SECRET'  # Replace with your actual client secret
-SOCIAL_AUTH_AUTH0_SCOPE = [
-    'openid',
-    'profile',
-    'email'
-]
-
-# URLs to redirect to after login/logout
-LOGIN_URL = '/login/auth0/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 
 TEMPLATES = [

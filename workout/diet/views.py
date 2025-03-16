@@ -4,8 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import User
 
 import json
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
@@ -30,7 +28,7 @@ def get_user_data(request):
     # Return the data as a JSON response
     return JsonResponse({'points': points, 'usernames': usernames})
 
-@login_required
+
 def homepage(request):
 
     return render(request, "diet/homepage.html",{
@@ -114,22 +112,16 @@ def update_points(request):
 
 def login_view(request):
     if request.method == "POST":
-
-        # Attempt to sign user in
-        email = request.POST["email"]
+        username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=email, password=password)
-
-        # Check if authentication successful
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("homepage"))
+            return redirect("homepage")
         else:
-            return render(request, "mail/login.html", {
-                "message": "Invalid email and/or password."
-            })
-    else:
-        return render(request, "diet/login.html")
+            return render(request, "login.html", {"message": "Invalid credentials."})
+    return render(request, "login.html")
+
 
 def register(request):
     if request.method == "POST":
